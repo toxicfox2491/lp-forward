@@ -1,6 +1,11 @@
 # GIVE ME MY RENDERER | lp-forward
 an extremely small replacement for lockdown protocol's first executable to let the user pass renderer arguments!
 the dev's (thankfully) didn't strip vulkan out entirely meaning linux users can have a better experience
+# flags
+here's the current flags:
+> theres no flag for vulkan since it'll launch with it by default
+* ```LP_DX11=1```
+* ```LP_DX12=1```
 
 # building
 if you intend to compile it yourself you'll need mingw
