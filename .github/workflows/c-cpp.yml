@@ -1,0 +1,49 @@
+name: Build lp-forward
+
+on:
+  push:
+    branches: [ main ]
+    tags: [ 'yippee-*' ]
+  pull_request:
+    branches: [ main ]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Install MinGW-w64
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y gcc-mingw-w64-x86-64
+
+      - name: Compile lp-forward.exe
+        run: |
+          x86_64-w64-mingw32-gcc lp-forward.c -o LockdownProtocol.exe -mwindows -nostdlib -lkernel32 -Os -s -fno-ident -fno-asynchronous-unwind-tables -fno-unwind-tables -Wl,--file-alignment,512,--disable-reloc-section,--gc-sections,-e,WinMainCRTStartup
+
+      - name: Upload Build
+        uses: actions/upload-artifact@v4
+        with:
+          name: LockdownProtocol
+          path: LockdownProtocol.exe
+
+      - name: Publish Release
+        if: github.ref == 'refs/heads/main'
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: latest
+          name: Latest Build
+          files: LockdownProtocol.exe
+          make_latest: true
+
+      - name: Publish Release tagged
+        if: startsWith(github.ref, 'refs/tags/')
+        uses: softprops/action-gh-release@v2
+        with:
+          files: LockdownProtocol.exe
