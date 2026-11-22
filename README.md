@@ -6,6 +6,9 @@
 # description
 an extremely small replacement for lockdown protocol's first executable to let the user pass renderer arguments!
 the dev's (thankfully) didn't strip vulkan out entirely meaning linux users can have a better experience
+
+
+for some context the original executable used to try pass -dx11, the game ultimately always launched with dx12 tho? but since -dx11 was set the user couldn't set the renderer themself, this fixes that
 # flags
 here's the current flags:
 > theres no flag for vulkan since it'll launch with it by default
