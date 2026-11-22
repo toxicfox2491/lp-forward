@@ -7,6 +7,11 @@ here's the current flags:
 * ```LP_DX11=1```
 * ```LP_DX12=1```
 
+# installation
+I know this probably isn't needed by most of you
+
+but encase you don't know how to install this, head over to [installation](https://github.com/toxicfox2491/lp-forward/blob/main/installation/readme.md)
+
 # building
 if you intend to compile it yourself you'll need mingw
 then run ./build.sh
